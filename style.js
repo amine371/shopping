@@ -1,87 +1,35 @@
-function add(i) { 
-   let qte=document.getElementById('quantity'+i).innerHTML;
-   let price=document.getElementById('item-price'+i).innerHTML;
-   let origine=document.getElementById('item-price'+i).getAttribute('value');
-   let n=parseInt(qte);
-   let p=parseInt(price);
-   let o=parseInt(origine);
-   n++;
-   p=p+o;
-   document.getElementById('item-price'+i).innerHTML=p+"$";
-   document.getElementById('quantity'+i).innerHTML=n;
-   let tp=document.getElementById('pricetot').innerHTML;
-   let tpn=parseInt(tp);
-   let s=tpn+o;
-   document.getElementById('pricetot').innerHTML=s+"$";
+let total = document.querySelector('#total');
+let times = document.querySelectorAll(".fa-times");
+let hearts = document.querySelectorAll(".fa-heart");
+let minus = document.querySelectorAll(".fa-minus-square");
+let plus = document.querySelectorAll(".fa-plus-square");
 
-   let sh=document.getElementById('shipping').innerHTML;
-   let shn=parseInt(sh);
-   let a=shn+4;
-   document.getElementById('shipping').innerHTML=a+"$";
 
-   let tol=document.getElementById('total').innerHTML;
-   let tt=parseInt(tol);
-   let t=a+s;
-   document.getElementById('total').innerHTML=t+"$";
-
+     
+for (let i = 0; i < times.length; i++) {
+    times[i].addEventListener("click",() => {   
+    times[i].parentElement.parentElement.remove();
+    })
 }
-function soustraction(i){
-    let qte=document.getElementById('quantity'+i).innerHTML;
-    let price=document.getElementById('item-price'+i).innerHTML;
-    let origine=document.getElementById('item-price'+i).getAttribute('value');
-    let n=parseInt(qte);
-    let p=parseInt(price);
-    let o=parseInt(origine);
-    n--;
-    p=p-o;
-    document.getElementById('item-price'+i).innerHTML=p+"$";
-    document.getElementById('quantity'+i).innerHTML=n;
-    let tp=document.getElementById('pricetot').innerHTML;
-    let tpn=parseInt(tp);
-    let s=tpn-o;
-    document.getElementById('pricetot').innerHTML=s+"$";
+Array.from(hearts).map(heart => {
+    heart.addEventListener('click', ()=> heart.classList.toggle('red'))
+    
+})
 
-    let sh=document.getElementById('shipping').innerHTML;
-   let shn=parseInt(sh);
-   let a=shn-4;
-   document.getElementById('shipping').innerHTML=a+"$";
-
-   let tol=document.getElementById('total').innerHTML;
-   let tt=parseInt(tol);
-   let t=a+s;
-   document.getElementById('total').innerHTML=t+"$";
-}
-
-function delet_item(i){
-    let price=document.getElementById('item-price'+i).innerHTML;
-let p=parseInt(price);
-let tp=document.getElementById('pricetot').innerHTML;
-let tpn=parseInt(tp);
-let s=tpn-p;
-
-let qte=document.getElementById('quantity'+i).innerHTML;
-let n=parseInt(qte);
-let sh=document.getElementById('shipping').innerHTML;
-let shn=parseInt(sh);
-let a=0;
-for(let k=1;k<=n;k++)
-{
-a=shn-4;
-}
-document.getElementById('shipping').innerHTML=a+"$";
-
-let tol=document.getElementById('total').innerHTML;
-let tt=parseInt(tol);
-let t=a+s;
-document.getElementById('total').innerHTML=t+"$";
-
-document.getElementById('pricetot').innerHTML=s+"$";
-
-    var node = document.getElementById("clothes"+i);
-if (node.parentNode) {
-  node.parentNode.removeChild(node);
-}
+Array.from(plus).map(pl => {
+    pl.addEventListener('click',() => {pl.nextElementSibling.innerHTML++
+    total.innerHTML=parseInt(total.innerHTML)+parseInt(pl.parentElement.nextElementSibling.firstChild.innerHTML)
+    
+})})
 
 
-
-}
+Array.from(minus).map(mn => {
+    
+    mn.addEventListener('click',() => {
+        if (mn.previousElementSibling.innerHTML <= 0) {
+            mn.previousElementSibling.innerHTML = 0;}
+             else {
+             mn.previousElementSibling.innerHTML--;
+             total.innerHTML=parseInt(total.innerHTML)-parseInt(mn.parentElement.nextElementSibling.firstChild.innerHTML)
+            }
+    })})
